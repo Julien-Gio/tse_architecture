@@ -1,0 +1,29 @@
+<h1>{{title}}</h1>
+<div class="container-sm text-center">
+    <form method="POST" action="signup/insert">
+        <div class="form-group">
+            <label for="firstname">Prénom :</label>
+            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Prénom">
+        </div>
+        <div class="form-group">
+            <label for="lastname">Nom :</label>
+            <input type="password" class="form-control" id="lastname" name="lastname" placeholder="Nom">
+        </div>
+
+        <label class="radio-inline"><input type="radio" name="student" checked>Elève</label>
+        <label class="radio-inline"><input type="radio" name="admin">Administrateur</label>
+        
+        <div class="form-group">
+            <label for="promo">Promotion :</label>
+            <select class="form-control" id="promo" name="promo">
+                <option>FISE 1</option>
+                <option>FISE 2</option>
+                <option>FISE 3</option>
+                <option>CITISE 1</option>
+                <option>CITISE 2</option>
+            </select>
+        </div> 
+        
+        <button class="btn btn-lg btn-danger btn-block" type="submit">Valider</button>
+    </form>
+</div>
