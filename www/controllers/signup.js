@@ -1,4 +1,5 @@
 var express = require('express');
+var db = require('../models/db');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
@@ -16,6 +17,8 @@ router.post('/insert', function(req, res, next) {
 
     console.log(data);
     
+    db.
+
     res.render('signup_success', { title: 'Compte crée'});
 });
 

@@ -10,10 +10,11 @@
             <input type="password" class="form-control" id="lastname" name="lastname" placeholder="Nom">
         </div>
 
-        <label class="radio-inline"><input type="radio" name="student" checked>Elève</label>
-        <label class="radio-inline"><input type="radio" name="admin">Administrateur</label>
-        
         <div class="form-group">
+            <label class="radio-inline"><input type="radio" id="radio_student" name="account_type" value="student" checked> Elève </label>
+            <label class="radio-inline"><input type="radio" id="radio_admin" name="account_type" value="admin"> Administrateur</label>
+        </div>
+        <div class="form-group" id="div_promo">
             <label for="promo">Promotion :</label>
             <select class="form-control" id="promo" name="promo">
                 <option>FISE 1</option>
@@ -27,3 +28,13 @@
         <button class="btn btn-lg btn-danger btn-block" type="submit">Valider</button>
     </form>
 </div>
+<script>
+    // When the user selects an account type, show or hide the "promo" accordingly
+    $("input[name='account_type']").change(function() {
+        if ($("#radio_student").prop("checked") === true) {
+            $("#div_promo").show("slow");  // Show the promo choice
+        } else {
+            $("#div_promo").slideUp();  // Hide the promo choice
+        }
+    });
+</script>
