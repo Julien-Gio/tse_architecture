@@ -1,5 +1,5 @@
 const express = require('express');
-const db = require('../models/db');
+const model_users = require('../models/model_users');
 
 const router = express.Router();
 
@@ -9,38 +9,18 @@ router.get('/', function(req, res, next) {
 
 router.post('/insert', function(req, res, next) {
     let data = {
-        first_name: req.body.firstname,
-        last_name: req.body.lastname,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
         promo: req.body.promo,
         account_type: req.body.account_type
     };
-
-    console.log(data);
     
-    // Check if the account creation is valid
-    // (1) Make sure that all the feilds are valid
-    // (2) Make sure the user doesn't already exist
-    let valid_data = true;
+    let error = model_users.create_user(data.firstname, data.lastname, "", data.account_type, data.promo);
 
-    // (1)
-    if (
-        data.first_name == ""
-        || data.last_name == "" 
-        || data.promo == "" 
-        || data.account_type == "" 
-    ) {
-        valid_data = false;
-    }
-    
-    // (2)
-    if (db.does_user_exist(data.first_name, data.last_name)) {
-        valid_data = false;
-    }
-
-    if (valid_data) {
+    if (error == "valid") {
         res.render('signup_success', { title: 'Compte crée'});
     } else {
-        // TODO
+        res.render('signup_failure', { title: 'Erreur.', error_str: error});
     }
 });
 
