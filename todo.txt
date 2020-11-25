@@ -1,24 +1,32 @@
 - General:
-    - Favicon
-    - Setup basic 'models' files
+    X Favicon
+    - Make identical to tse intranet
+        - font
+        - button style
+    X Setup basic 'models' files with db and helper functions
     
 - Login page:
-    - username/password interface
+    X username/password interface
     - Make it identical to TSE intranet login
+        - Banner
+        X form
+        - 'mauvais login' div
 
-- Creation de compte page:
-    - Nom
-    - Prenom
-    - Promo/admin
+X Creation de compte page:
+    X Form
+    X Verify data
+    X Create user
 
-- Acceuil étudiant:
+- Student landing page:
+    X Make the view
     - Tableau avec tous les voyages de l'étudiant
     - Option pour pouvoir modifier un voyage
     - Option pour effacer un voyage
+        - Popup de confirmation quand l'utilisateur veut effacer un voyage
     - Bouton pour créer un nouveau voyage
-    - Popup de confirmation quand l'utilisateur veut effacer un voyage
 
 - Création voyage (étudiant):
+    - Make the view
     - Destination, Date début, date fin
     - Bouton de validation
 
@@ -26,7 +34,8 @@
     - Modification des champs
     - Bouton de validation
 
-- Acceuil Admin:
+- Admin landing page:
+    - Make the base view
     - Tableau avec tous les voyage (trié alphabetiquement par Destination)
     - Options de filtrage:
         - Par pays

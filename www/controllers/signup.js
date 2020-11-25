@@ -7,20 +7,24 @@ router.get('/', function(req, res, next) {
     res.render('signup', { title: 'Création de compte' });
 });
 
-router.post('/insert', function(req, res, next) {
-    let data = {
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        promo: req.body.promo,
-        account_type: req.body.account_type
-    };
-    
-    let error = model_users.create_user(data.firstname, data.lastname, "", data.account_type, data.promo);
+router.post('/insert', async function(req, res, next) {
+    try {
+        let data = {
+            firstname: req.body.firstname.toLowerCase(),
+            lastname: req.body.lastname.toLowerCase(),
+            promo: req.body.promo,
+            account_type: req.body.account_type
+        };
+        
+        let error = await model_users.create_user(data.firstname, data.lastname, "", data.account_type, data.promo);
 
-    if (error == "valid") {
-        res.render('signup_success', { title: 'Compte crée'});
-    } else {
-        res.render('signup_failure', { title: 'Erreur.', error_str: error});
+        if (error == "valid") {
+            res.render('signup_success', { title: 'Compte crée'});
+        } else {
+            res.render('signup_failure', { title: 'Erreur.', error_str: error});
+        }
+    } catch (err) {
+        console.error(err);
     }
 });
 
