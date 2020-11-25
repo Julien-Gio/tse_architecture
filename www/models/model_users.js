@@ -64,8 +64,26 @@ get_user_firstname_by_id = async (uid) => {
 }
 
 
+get_user_id_by_name = async (firstname, lastname) => {
+    let out = -1;
+    try {
+        let res = await db_con.query("SELECT uid FROM Users WHERE firstname = '" + firstname + "' AND lastname = '" + lastname + "';");
+        if (res.length > 0) {
+            out = res[0].uid;
+        } else {
+            console.log("Error : user " + firstname + " " + lastname + " was not found in DB.");
+        }
+    } catch (err) {
+        console.error(err);
+    }
+
+    return out;
+}
+
+
 module.exports = {
     create_user,
     does_user_exist,
-    get_user_firstname_by_id
+    get_user_firstname_by_id,
+    get_user_id_by_name,
 }

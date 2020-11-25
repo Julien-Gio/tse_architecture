@@ -1,0 +1,25 @@
+
+<h1>Mobilités TSE</h1>
+
+<div class="container-sm text-center">
+    <form class="" method="POST" action="/student/edit">
+    <div class="input-daterange input-group" id="datepicker">
+            <input type="text" class="input-sm form-control" name="start" autocomplete="off">
+        <div class="input-group-prepend">
+            <span class="input-group-text">à</span>
+        </div>
+        <input type="text" class="input-sm form-control" name="end">
+    </div>
+        <button class="btn btn-lg btn-danger btn-block" type="submit">{{#if mode_create}}Créer{{else}}Modifier{{/if}} Voyage</button>
+    </form>
+</div>
+
+<script>
+    $('.input-daterange').datepicker({
+        format: "dd/mm/yyyy",
+        startView: 1,
+        maxViewMode: 2,
+        autoclose: true,
+        todayHighlight: true
+    });
+</script>

@@ -12,6 +12,9 @@
         X form
         - 'mauvais login' div
 
+- Footer:
+    - TODO : Footer tasks
+
 X Creation de compte page:
     X Form
     X Verify data
@@ -20,6 +23,8 @@ X Creation de compte page:
 - Student landing page:
     X Make the view
     - Tableau avec tous les voyages de l'étudiant
+        X Afficher les trips
+        - Afficher un crayon/message quand on hover pour indiquer ce qu'il va se passer en cliquant
     - Option pour pouvoir modifier un voyage
     - Option pour effacer un voyage
         - Popup de confirmation quand l'utilisateur veut effacer un voyage
