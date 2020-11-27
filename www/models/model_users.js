@@ -20,7 +20,7 @@ create_user = async (firstname, lastname, _password, account_type, promo) => {
         out = "Promo data invalid (value passed: '" + promo + "')";
     }
     // (2)
-    if (out == "valid" && await db_helper.does_user_exist(firstname, lastname)) {
+    if (out == "valid" && await db_helper.does_user_exist_by_names(firstname, lastname)) {
         out = "User " + firstname + " " + lastname + " already exists";
     }
     
@@ -41,9 +41,9 @@ create_user = async (firstname, lastname, _password, account_type, promo) => {
 }
 
 
-does_user_exist = async (firstname, lastname) => {
+does_user_exist_by_names = async (firstname, lastname) => {
     // Returns true or false
-    return await db_helper.does_user_exist(firstname, lastname);
+    return await db_helper.does_user_exist_by_names(firstname, lastname);
 }
 
 
@@ -83,7 +83,7 @@ get_user_id_by_name = async (firstname, lastname) => {
 
 module.exports = {
     create_user,
-    does_user_exist,
+    does_user_exist_by_names,
     get_user_firstname_by_id,
     get_user_id_by_name,
 }

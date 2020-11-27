@@ -9,7 +9,7 @@
     X username/password interface
     - Make it identical to TSE intranet login
         - Banner
-        X form
+        - form
         - 'mauvais login' div
 
 - Footer:
@@ -31,9 +31,13 @@ X Creation de compte page:
     - Bouton pour créer un nouveau voyage
 
 - Création voyage (étudiant):
-    - Make the view
-    - Destination, Date début, date fin
-    - Bouton de validation
+    X Make the view
+    X Destination, Date début, date fin
+    X Bouton de validation
+    - Verifier que le nom est unique
+    - Ajouter le voyage a la BDD
+    - Modifier le voyage dans la BDD
+    - Dans le cas de la modification, préremplir le formulaire
 
 - Modification voyage (étudiant):
     - Modification des champs
@@ -41,7 +45,7 @@ X Creation de compte page:
 
 - Admin landing page:
     - Make the base view
-    - Tableau avec tous les voyage (trié alphabetiquement par Destination)
+    - Tableau avec tous les voyage (trié alphabetiquement par date de début)
     - Options de filtrage:
         - Par pays
         - Par ville

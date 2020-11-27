@@ -12,11 +12,29 @@ const db_con = require('./db_connection').makeDb();
 //     return out; 
 // }
 
-const does_user_exist = async (firstname, lastname) => {
+const does_user_exist_by_names = async (firstname, lastname) => {
     let out = false;
     
     try {
         let res = await db_con.query("SELECT * FROM Users WHERE firstname = '" + firstname + "' AND lastname = '" + lastname + "';");
+        if (res.length == 0) {
+            out = false;
+        } else {
+            out = true;
+        }
+    } catch(err) {
+        console.error(err);
+    }
+
+    return out;
+}
+
+
+const does_user_exist_by_id = async (user_id) => {
+    let out = false;
+    
+    try {
+        let res = await db_con.query("SELECT * FROM Users WHERE uid = " + user_id + ";");
         if (res.length == 0) {
             out = false;
         } else {
@@ -87,7 +105,8 @@ const get_user_account_type_by_id = async (user_id) => {
 
 
 module.exports = {
-    does_user_exist,
+    does_user_exist_by_names,
+    does_user_exist_by_id,
     does_promo_exist,
     get_promo_id_by_name,
     get_user_account_type_by_id,

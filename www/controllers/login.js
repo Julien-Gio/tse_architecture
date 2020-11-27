@@ -15,7 +15,7 @@ router.post('/', async function(req, res) {
   
   try {
     // Check if user exists
-    if (await model_users.does_user_exist(firstname, lastname)) {  
+    if (await model_users.does_user_exist_by_names(firstname, lastname)) {  
       // Create session
       req.session.user_id = await model_users.get_user_id_by_name(firstname, lastname);
       

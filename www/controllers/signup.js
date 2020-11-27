@@ -3,11 +3,11 @@ const model_users = require('../models/model_users');
 
 const router = express.Router();
 
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
     res.render('signup', { title: 'Création de compte' });
 });
 
-router.post('/insert', async function(req, res, next) {
+router.post('/insert', async function(req, res) {
     try {
         let data = {
             firstname: req.body.firstname.toLowerCase(),
