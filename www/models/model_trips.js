@@ -68,6 +68,7 @@ get_trip_by_id = async (trip_id) => {
         let res = await db_con.query("SELECT * FROM Trips WHERE trip_id = " + trip_id + ";");
         if (res.length > 0) {
             out = res[0];
+            console.log(out);
         } else {
             throw new Error("Trip with id " + trip_id + " not found!");
         }

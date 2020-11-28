@@ -1,21 +1,19 @@
 <h1>{{title}}</h1>
 
 <div class="container-sm text-center">
-    <form class="" method="POST" action="/login">
+    <form class="form-signin" method="POST" action="/login">
 
         {{#if show_invalid_div }}
         <div class="alert alert-danger alert-sm">
             Mauvais login.
         </div>
         {{/if }}
-
-        <div class="form-group">
-            <input type="text" class="form-signin" id="username" name="username" placeholder="Username" pattern="[a-zA-Z]*\.[a-zA-Z]*">
-            <input type="password" class="form-control" id="pswd" name="pswd" placeholder="Password">
-        </div>
-        <div class="form-group">
-        </div>
+        
+        <input type="text" class="form-control" id="username" name="username" placeholder="Username" pattern="[a-zA-Z]*\.[a-zA-Z]*">
+        <input type="password" class="form-control" id="pswd" name="pswd" placeholder="Password">
+    
         <button class="btn btn-lg btn-danger btn-block" type="submit">Connexion</button>
+
+        <a class="" href="/signup">Créer un compte.</a>
     </form>
-    <a class="" href="/signup">Créer un compte.</a>
 </div>

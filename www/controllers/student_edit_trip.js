@@ -19,7 +19,10 @@ router.get('/', async function(req, res) {
 
         if (!req.query.new) {
             try {
+                req.query.new = 0;  // Make sure that 'new' is set to something
                 data = await model_trips.get_trip_by_id(req.query.trip_id);
+                data.start_date = data.start_date.getFullYear() + "-" + data.start_date.getMonth() + "-" + data.start_date.getDate();
+                data.end_date = data.end_date.getFullYear() + "-" + data.end_date.getMonth() + "-" + data.end_date.getDate();
             } catch (err) {
                 console.error(err);
                 console.log("Trip info not found. Acting as id 'new=1");

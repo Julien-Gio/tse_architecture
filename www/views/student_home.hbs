@@ -16,7 +16,7 @@
                     <div class="list-group" id="trip-list">
                         {{!-- https://getbootstrap.com/docs/4.0/migration/#list-groups --}}
                         {{#each trips}}
-                        <a class="list-group-item" href="">{{this.display_name}}</a>
+                        <a class="list-group-item trip-item" href="/student/edit?trip_id={{this.trip_id}}">{{this.display_name}}</a>
                         {{/each}}
                     </div>
                 </div>

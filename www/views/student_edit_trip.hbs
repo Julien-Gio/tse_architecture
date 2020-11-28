@@ -10,9 +10,11 @@
         <div class="form-group">
             <label for="trip_name">Titre du voyage</label>
             <input type="text" id="trip_name" class="form-control" aria-describedby="trip_name_helptext">
-            <small id="trip_name_helptext" class="form-text text-muted">
-            Attention, une fois le titre validé, il ne pourra plus être modifié.
-            </small>
+            {{#if mode_create}}
+                <small id="trip_name_helptext" class="form-text text-muted">
+                Attention, une fois le titre validé, il ne pourra plus être modifié.
+                </small>
+            {{/if}}
         </div>
         
         <label for="date_start">Dates</label>
@@ -37,8 +39,6 @@
         <div class="form-group">
             <label for="country">Pays</label>
             <select id="country" class="form-control">
-                <option selected>...</option>
-                <option>....</option>
             </select>
         </div>
 
@@ -54,22 +54,32 @@
     </form>
 </div>
 
+<script src="/javascripts/countries.js"></script>
+
 <script>
+// Add countries to select
+for (let c in countries) {
+    $("#country").append($('<option>', {
+        value: c,
+        text: countries[c]
+    }));
+}
+
+
 if (!{{mode_create}}) {
     // Préremplir le formulaire
-    let data = {{trip_data}};
-    $("#trip_name").text = data.display_name;
+    $("#trip_name").val("{{trip_data.display_name}}");
     $("#trip_name").prop("disabled", true);
 
-    $("#date_start").text = data.start_date;
-    $("#date_end").text = data.end_date;
+    $("#date_start").val("{{trip_data.start_date}}");
+    $("#date_end").val("{{trip_data.end_date}}");
 
-    $("#city").text = data.city_name;
-    $("#country").text = data.country_name;
+    $("#city").val("{{trip_data.city_name}}");
+    $("#country").val("{{trip_data.country_name}}");
 }
 
 $('.input-daterange').datepicker({
-    format: "dd/mm/yyyy",
+    format: "yyyy-mm-dd",
     startView: 1,
     maxViewMode: 2,
     autoclose: true,

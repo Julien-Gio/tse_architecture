@@ -24,8 +24,10 @@ X Creation de compte page:
     X Make the view
     - Tableau avec tous les voyages de l'étudiant
         X Afficher les trips
+        - Afficher les dates et desinations
+        - Différencier les voyages passés, en cours et terminés
         - Afficher un crayon/message quand on hover pour indiquer ce qu'il va se passer en cliquant
-    - Option pour pouvoir modifier un voyage
+    X Click pour pouvoir modifier un voyage
     - Option pour effacer un voyage
         - Popup de confirmation quand l'utilisateur veut effacer un voyage
     - Bouton pour créer un nouveau voyage
@@ -36,12 +38,13 @@ X Creation de compte page:
     X Bouton de validation
     - Verifier que le nom est unique
     - Ajouter le voyage a la BDD
-    - Modifier le voyage dans la BDD
-    - Dans le cas de la modification, préremplir le formulaire
 
 - Modification voyage (étudiant):
-    - Modification des champs
-    - Bouton de validation
+    - Make the view
+    - Modifier le voyage dans la BDD
+    - Dans le cas de la modification, préremplir le formulaire
+    X Modification des champs
+    X Bouton de validation
 
 - Admin landing page:
     - Make the base view
