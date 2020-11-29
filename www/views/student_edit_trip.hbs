@@ -2,14 +2,14 @@
 <h1>Mobilités TSE</h1>
 
 <div class="container">
-    <form class="" method="POST" action="/student/edit">
+    <form class="" method="POST" {{#if mode_create}} action="/student/edit/insert" {{else}} action="/student/edit/update" {{/if}}>
 
         <h4 class="mt-4">{{#if mode_create}}Nouveau{{else}}Modification de{{/if}} voyage</h4>
         <hr class="mt-0 mb-2">
 
         <div class="form-group">
             <label for="trip_name">Titre du voyage</label>
-            <input type="text" id="trip_name" class="form-control" aria-describedby="trip_name_helptext">
+            <input type="text" id="trip_name" class="form-control" name="trip_name" aria-describedby="trip_name_helptext">
             {{#if mode_create}}
                 <small id="trip_name_helptext" class="form-text text-muted">
                 Attention, une fois le titre validé, il ne pourra plus être modifié.
@@ -34,16 +34,16 @@
 
         <div class="form-group">
             <label for="city">Ville</label>
-            <input type="text" id="city" class="form-control">
+            <input type="text" id="city" class="form-control" name="city">
         </div>
         <div class="form-group">
             <label for="country">Pays</label>
-            <select id="country" class="form-control">
+            <select id="country" class="form-control" name="country">
             </select>
         </div>
 
 
-        <button class="btn btn-lg btn-danger btn-block" type="submit" {{#if mode_create}} href="./insert" {{else}} href="./update" {{/if}}>
+        <button class="btn btn-lg btn-danger btn-block" type="submit">
             {{#if mode_create}}
                 Créer
             {{else}}

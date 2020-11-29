@@ -2,7 +2,6 @@ const db_helper = require('./db_helper');
 const db_con = require("./db_connection").makeDb();
 
 
-
 create_trip = async (user_id, display_name, city_name, country_name, start_date, end_date) => {
     // Returns "valid" if all paramaters are ok for an account creation
 
@@ -13,36 +12,43 @@ create_trip = async (user_id, display_name, city_name, country_name, start_date,
     let out = "valid";
 
     // (1)
-    if (display_name == "" || city_name == "" || country_name == "") {
+    if (user_id === undefined || display_name === undefined || city_name === undefined || country_name === undefined || start_date === undefined || end_date === undefined) {
+        out = "Some data was undefined : user_id:" + user_id + " name:" + display_name + " city:" + city_name + " country:" + country_name + " start_date:" + start_date + " end_date:" + end_date;
+    }
+    else if (display_name == "" || city_name == "" || country_name == "" || start_date == "" || end_date == "") {
         out = "Incomplete data";
     } else if (await db_helper.does_user_exist_by_id(user_id) == false) {
         out = "User not found (uid passed: '" + user_id + "')";
+    } else if (Date.parse(start_date) == NaN || Date.parse(end_date) == NaN) {
+        out = "Date format invalid (received: " + start_date + " and " + end_date + ")";
     }
+
     // (2)
-    // TODO
+    if (out == "valid" && Date.parse(start_date) > Date.parse(end_date)) {
+        out = "Invalid dates, start_date cannot be after end_date";
+    } 
 
     // (3)
     if (out == "valid") {
         try {
-            let res =  await db_con.query("");
+            let res =  await db_con.query("SELECT * FROM Trips WHERE user_id = " + user_id + " AND display_name = '" + display_name + "';");
             if (res.length != 0) {
-                out = "User " + firstname + " " + lastname + " already exists";
+                out = "User " + user_id + " already has a trip named " + display_name;
             }
         } catch (err) {
             out = "Error when checking if trip already exists (" + err.message + ")";
         }
     }
     
-
     // Create the trips
     if (out == "valid") {
         try {
             // TODO
-            // await db_con.query("INSERT INTO Users (lastname, firstname, role, id_promo) VALUES " +
-            //                    "('" + lastname + "', '" + firstname + "', '" + account_type + "', " + promo_id + ");");
+            await db_con.query("INSERT INTO Trips (user_id, display_name, city_name, country_name, start_date, end_date) VALUES" +
+                                "(" + user_id + ", '" + display_name + "', '" + city_name + "', '" + country_name + "', '" + start_date + "', '" + end_date + "');");
         } catch (err) {
             console.error(err);
-            // out = "Unable to insert (" + + lastname + "', '" + firstname + "', '" + account_type + "', " + promo_id + ")";
+            out = "Unable to insert (" + user_id + ", '" + display_name + "', '" + city_name + "', '" + country_name + "', '" + start_date + "', '" + end_date + "')";
         }
     }
 
@@ -53,7 +59,7 @@ create_trip = async (user_id, display_name, city_name, country_name, start_date,
 get_trips_by_user_id = async (user_id) => {
     let out = [];
     try {
-        let res = db_con.query("SELECT * FROM Trips WHERE user_id = " + user_id + ";");
+        let res = db_con.query("SELECT * FROM Trips WHERE user_id = " + user_id + " ORDER BY start_date;");
         out = res
     } catch (err) {
         console.error(err);
@@ -61,6 +67,7 @@ get_trips_by_user_id = async (user_id) => {
 
     return out;
 }
+
 
 get_trip_by_id = async (trip_id) => {
     let out = {};

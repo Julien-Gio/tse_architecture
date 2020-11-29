@@ -11,8 +11,24 @@ router.get('/', async function(req, res) {
     } else {
         try {
             let trip_data = await model_trips.get_trips_by_user_id(req.session.user_id);
+            trip_data = JSON.parse(JSON.stringify(trip_data));
+
+            // Determiner si chaque voyage est à venir, en cours ou terminé.
+            trip_data.forEach(function(t) {
+                if (Date.parse(t.start_date) > Date.now()) {
+                    t.upcoming = true;
+                } else if (Date.parse(t.end_date) < Date.now()) {
+                    t.past = true;
+                } else {
+                    t.current = true;
+                }
+            });
+
+            let user_data = await model_users.get_user_by_id(req.session.user_id);
+            trip_data = JSON.parse(JSON.stringify(trip_data));
+            
             res.render('student_home', { 
-                firstname: await model_users.get_user_firstname_by_id(req.session.user_id),
+                user_data: user_data,
                 trips: trip_data
             });
         } catch (err) {

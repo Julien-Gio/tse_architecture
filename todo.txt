@@ -3,8 +3,10 @@
     - Make identical to tse intranet
         - font
         - button style
+
     X Setup basic 'models' files with db and helper functions
     
+
 - Login page:
     X username/password interface
     - Make it identical to TSE intranet login
@@ -12,32 +14,44 @@
         - form
         - 'mauvais login' div
 
+
 - Footer:
     - TODO : Footer tasks
+
 
 X Creation de compte page:
     X Form
     X Verify data
     X Create user
 
+
 - Student landing page:
     X Make the view
+    - Message de bienvenue
+        X Afficher le message
+        - Capitaliser le nom/prenom
+
     - Tableau avec tous les voyages de l'étudiant
         X Afficher les trips
-        - Afficher les dates et desinations
-        - Différencier les voyages passés, en cours et terminés
-        - Afficher un crayon/message quand on hover pour indiquer ce qu'il va se passer en cliquant
+        - Afficher les desinations
+        X Différencier les voyages passés, en cours et terminés
+        - (REMOVE ?) Afficher un crayon/message quand on hover pour indiquer ce qu'il va se passer en cliquant
+    
     X Click pour pouvoir modifier un voyage
     - Option pour effacer un voyage
         - Popup de confirmation quand l'utilisateur veut effacer un voyage
+    
     - Bouton pour créer un nouveau voyage
+
 
 - Création voyage (étudiant):
     X Make the view
     X Destination, Date début, date fin
     X Bouton de validation
-    - Verifier que le nom est unique
-    - Ajouter le voyage a la BDD
+    X Ajouter le voyage a la BDD
+    - Client side data validation
+    X Server side data validation (with error message)
+
 
 - Modification voyage (étudiant):
     - Make the view
@@ -45,6 +59,7 @@ X Creation de compte page:
     - Dans le cas de la modification, préremplir le formulaire
     X Modification des champs
     X Bouton de validation
+
 
 - Admin landing page:
     - Make the base view
@@ -54,5 +69,6 @@ X Creation de compte page:
         - Par ville
         - Par nom/prenom
         - Par promo
+
 
 - Carte interactive

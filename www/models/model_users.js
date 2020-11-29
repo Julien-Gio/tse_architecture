@@ -47,6 +47,23 @@ does_user_exist_by_names = async (firstname, lastname) => {
 }
 
 
+get_user_by_id = async (uid) => {
+    let out = {};
+    try {
+        let res = await db_con.query("SELECT * FROM Users WHERE uid = " + uid + ";");
+        if (res.length > 0) {
+            out = res[0];
+        } else {
+            throw new Error("User with id " + uid + " not found!");
+        }
+    } catch (err) {
+        console.error(err);
+    }
+    
+    return out;
+}
+
+
 get_user_firstname_by_id = async (uid) => {
     let out = "Unknown";
     try {
@@ -84,6 +101,7 @@ get_user_id_by_name = async (firstname, lastname) => {
 module.exports = {
     create_user,
     does_user_exist_by_names,
+    get_user_by_id,
     get_user_firstname_by_id,
     get_user_id_by_name,
 }

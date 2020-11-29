@@ -4,8 +4,9 @@
         <div class="col-sm-6" id="panel-left">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{firstname}}, bienvenue.</h5>
-                    <p class="card-text">Bla bla.</p>
+                    <h5 class="card-title">{{user_data.firstname}} {{user_data.lastname}}, bienvenue.</h5>
+                    <p class="card-text">Cliquez sur un voyage pour le modifier.</p>
+                    <p class="card-text">Vous pouvez aussi créer de nouveau voyages pour vous.</p>
                 </div>
             </div>
         </div>
@@ -16,8 +17,20 @@
                     <div class="list-group" id="trip-list">
                         {{!-- https://getbootstrap.com/docs/4.0/migration/#list-groups --}}
                         {{#each trips}}
-                        <a class="list-group-item trip-item" href="/student/edit?trip_id={{this.trip_id}}">{{this.display_name}}</a>
+                        <a class="list-group-item list-group-item-action list-group-item d-flex justify-content-between align-items-center" href="/student/edit?trip_id={{this.trip_id}}">
+                            {{this.display_name}} - {{this.country_name}}
+                            {{#if this.upcoming}}
+                            <span class="badge badge-secondary badge-pill">A venir</span>
+                            {{/if}}
+                            {{#if this.current}}
+                            <span class="badge badge-primary badge-pill">En cours</span>
+                            {{/if}}
+                            {{#if this.past}}
+                            <span class="badge badge-light badge-pill">Terminé</span>
+                            {{/if}}
+                        </a>
                         {{/each}}
+                        <a class="list-group-item list-group-item-action list-group-item-success" href="/student/edit?new=1">Créer un nouveau voyage</a>
                     </div>
                 </div>
             </div>

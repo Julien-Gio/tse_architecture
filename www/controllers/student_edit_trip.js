@@ -5,10 +5,10 @@ const model_trips = require('../models/model_trips');
 const router = express.Router();
 
 router.get('/', async function(req, res) {
-    // if (req.session.user_id === -1 || req.session.user_id === undefined) {
-    //     // Not logged in, redirect to login page (aka index)
-    //     res.redirect('/');
-    // } else {
+    if (req.session.user_id === -1 || req.session.user_id === undefined) {
+        // Not logged in, redirect to login page (aka index)
+        res.redirect('/');
+    } else {
         // TODO
         let data = {};
 
@@ -35,24 +35,25 @@ router.get('/', async function(req, res) {
             mode_create: req.query.new,
             trip_data: data
         });
-    // }
+    }
 });
 
 
 router.post('/insert', async function(req, res) {
-    // if (req.session.user_id === -1 || req.session.user_id === undefined) {
-    //     // Not logged in, redirect to login page (aka index)
-    //     res.redirect('/');
-    // } else {
+    if (req.session.user_id === -1 || req.session.user_id === undefined) {
+        // Not logged in, redirect to login page (aka index)
+        res.redirect('/');
+    } else {
         try {
             let data = {
-                display_name: req.body.display_name,
+                display_name: req.body.trip_name,
                 city_name: req.body.city,
                 country_name: req.body.country,
-                start_date: req.body.date_start,
-                end_date: req.body.date_end
+                start_date: req.body.start,
+                end_date: req.body.end
             };
-            
+            console.log(data);
+            console.log(req.body);
             let error = await model_trips.create_trip(req.session.user_id, data.display_name, data.city_name, data.country_name, data.start_date, data.end_date);
     
             if (error == "valid") {
@@ -63,7 +64,7 @@ router.post('/insert', async function(req, res) {
         } catch (err) {
             console.error(err);
         }
-    // }
+    }
 });
 
 
