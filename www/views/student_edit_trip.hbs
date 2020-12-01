@@ -2,14 +2,14 @@
 <h1>Mobilités TSE</h1>
 
 <div class="container">
-    <form class="" method="POST" {{#if mode_create}} action="/student/edit/insert" {{else}} action="/student/edit/update" {{/if}}>
-
+    <form class="needs-validation" method="POST" {{#if mode_create}} action="/student/edit/insert" {{else}} action="/student/edit/update" {{/if}} novalidate>
+        <input type="hidden" name="trip_id" value="{{trip_data.trip_id}}">
         <h4 class="mt-4">{{#if mode_create}}Nouveau{{else}}Modification de{{/if}} voyage</h4>
         <hr class="mt-0 mb-2">
 
         <div class="form-group">
             <label for="trip_name">Titre du voyage</label>
-            <input type="text" id="trip_name" class="form-control" name="trip_name" aria-describedby="trip_name_helptext">
+            <input type="text" id="trip_name" class="form-control" name="trip_name" aria-describedby="trip_name_helptext" required>
             {{#if mode_create}}
                 <small id="trip_name_helptext" class="form-text text-muted">
                 Attention, une fois le titre validé, il ne pourra plus être modifié.
@@ -22,11 +22,11 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">Du</span>
             </div>
-            <input type="text" class="input-sm form-control" id="date_start" name="start" autocomplete="off">
+            <input type="text" class="input-sm form-control" id="date_start" name="start" autocomplete="off" required>
             <div class="input-group-prepend">
                 <span class="input-group-text">au</span>
             </div>
-            <input type="text" class="input-sm form-control" id="date_end" name="end">
+            <input type="text" class="input-sm form-control" id="date_end" name="end" required>
         </div>
         
         <h4 class="mt-4">Destination</h4>
@@ -34,11 +34,11 @@
 
         <div class="form-group">
             <label for="city">Ville</label>
-            <input type="text" id="city" class="form-control" name="city">
+            <input type="text" id="city" class="form-control" name="city" required>
         </div>
         <div class="form-group">
             <label for="country">Pays</label>
-            <select id="country" class="form-control" name="country">
+            <select id="country" class="form-control" name="country" required>
             </select>
         </div>
 
@@ -57,6 +57,9 @@
 <script src="/javascripts/countries.js"></script>
 
 <script>
+existing_trip_names = [{{#each existing_trip_names}}"{{this}}",{{/each}}];
+
+
 // Add countries to select
 for (let c in countries) {
     $("#country").append($('<option>', {
@@ -85,4 +88,54 @@ $('.input-daterange').datepicker({
     autoclose: true,
     todayHighlight: true
 });
+</script>
+
+
+<script>
+// For disabling form submissions if there are invalid fields
+// Inspired by : https://getbootstrap.com/docs/4.0/components/forms/?#validation
+(function() {
+    'use strict';
+    window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+            $("#trip_name") .removeClass("is-invalid"); 
+            $("#date_start").removeClass("is-invalid"); 
+            $("#date_end")  .removeClass("is-invalid"); 
+            $("#city")      .removeClass("is-invalid"); 
+            let valid_form = true;
+            
+            if ($("#trip_name").val() == "") {  // Si le nom est vide 
+                valid_form = false;
+                $("#trip_name").addClass("is-invalid");
+            }
+
+            {{#if mode_create}}  // Si en mode création de voyage
+            if (existing_trip_names.includes($("#trip_name").val())) {  // Si le nom est déjà pris par un autre voyage TODO
+                valid_form = false;
+                $("#trip_name").addClass("is-invalid");
+            }
+            {{/if}}
+
+            if ($("#date_start").val() == "" || $("#date_end").val() == "" || Date.parse($("#date_start").val()) > Date.parse($("#date_end").val())) {  // Si la date de fin est avant la date de début
+                valid_form = false;
+                $("#date_start").addClass("is-invalid");
+                $("#date_end").addClass("is-invalid");
+            }
+            if (/^[A-Za-zÀ-ÖØ-öø-ÿ\-]+$/i.test($("#city").val()) === false) {  // Si le nom de la ville contient que des lettres (accents et '-' acceptés)
+                valid_form = false;
+                $("#city").addClass("is-invalid"); 
+            }
+
+            if (!valid_form) {  // Si ce n'est pas bon, annuler le submit
+                event.preventDefault();
+                event.stopPropagation();
+            }
+        }, false);
+    });
+    }, false);
+})();
 </script>

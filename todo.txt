@@ -27,38 +27,40 @@ X Creation de compte page:
 
 - Student landing page:
     X Make the view
-    - Message de bienvenue
+    X Message de bienvenue
         X Afficher le message
-        - Capitaliser le nom/prenom
+        X Capitaliser le nom/prenom
 
-    - Tableau avec tous les voyages de l'étudiant
+    X Tableau avec tous les voyages de l'étudiant
         X Afficher les trips
-        - Afficher les desinations
+        X Afficher les desinations
         X Différencier les voyages passés, en cours et terminés
-        - (REMOVE ?) Afficher un crayon/message quand on hover pour indiquer ce qu'il va se passer en cliquant
     
-    X Click pour pouvoir modifier un voyage
     - Option pour effacer un voyage
+        - Bouton
+        - Implementation
         - Popup de confirmation quand l'utilisateur veut effacer un voyage
     
-    - Bouton pour créer un nouveau voyage
+    X Click sur un voyage pour le modifier
+    X Bouton pour créer un nouveau voyage
+
+    X Création voyage (étudiant):
+        X Make the view
+        X Destination, Date début, date fin
+        X Bouton de validation
+        X Ajouter le voyage a la BDD
+        X Client side data validation
+        X Server side data validation (with error message)
 
 
-- Création voyage (étudiant):
-    X Make the view
-    X Destination, Date début, date fin
-    X Bouton de validation
-    X Ajouter le voyage a la BDD
-    - Client side data validation
-    X Server side data validation (with error message)
-
-
-- Modification voyage (étudiant):
-    - Make the view
-    - Modifier le voyage dans la BDD
-    - Dans le cas de la modification, préremplir le formulaire
-    X Modification des champs
-    X Bouton de validation
+    X Modification voyage (étudiant):
+        X Make the view
+        X Modifier le voyage dans la BDD
+        X Dans le cas de la modification, préremplir le formulaire
+        X Modification des champs
+        X Bouton de validation
+        X Client side data validation
+        X Server side data validation (with error message)
 
 
 - Admin landing page:
@@ -70,5 +72,4 @@ X Creation de compte page:
         - Par nom/prenom
         - Par promo
 
-
-- Carte interactive
+    - Carte interactive

@@ -40,10 +40,9 @@ create_trip = async (user_id, display_name, city_name, country_name, start_date,
         }
     }
     
-    // Create the trips
+    // Create the trip
     if (out == "valid") {
         try {
-            // TODO
             await db_con.query("INSERT INTO Trips (user_id, display_name, city_name, country_name, start_date, end_date) VALUES" +
                                 "(" + user_id + ", '" + display_name + "', '" + city_name + "', '" + country_name + "', '" + start_date + "', '" + end_date + "');");
         } catch (err) {
@@ -52,6 +51,43 @@ create_trip = async (user_id, display_name, city_name, country_name, start_date,
         }
     }
 
+    return out;
+}
+
+
+update_trip = async (trip_id, city_name, country_name, start_date, end_date) => {
+    // Returns "valid" if all paramaters are ok for an account creation
+    
+    // Check if the account creation is valid
+    // (1) Make sure that all the feilds are valid inputs
+    // (2) Verify that start_date is before end_date
+    let out = "valid";
+    // (1)
+    if (trip_id === undefined || city_name === undefined || country_name === undefined || start_date === undefined || end_date === undefined) {
+        out = "Some data was undefined : trip_id:" + trip_id + " city:" + city_name + " country:" + country_name + " start_date:" + start_date + " end_date:" + end_date;
+    }
+    else if (trip_id == "" || city_name == "" || country_name == "" || start_date == "" || end_date == "") {
+        out = "Incomplete data";
+    } else if (await get_trip_by_id(trip_id) == {}) {
+        out = "Trip not found (trip_id passed: '" + trip_id + "')";
+    } else if (Date.parse(start_date) == NaN || Date.parse(end_date) == NaN) {
+        out = "Date format invalid (received: " + start_date + " and " + end_date + ")";
+    }
+
+    // (2)
+    if (out == "valid" && Date.parse(start_date) > Date.parse(end_date)) {
+        out = "Invalid dates, start_date cannot be after end_date";
+    } 
+    
+    // Update the trip
+    if (out == "valid") {
+        try {
+            await db_con.query("UPDATE Trips SET city_name = '" + city_name + "', country_name = '" + country_name + "', start_date = '" + start_date + "', end_date = '" + end_date + "' WHERE trip_id = " + trip_id + ";");
+        } catch (err) {
+            console.error(err);
+            out = "Unable to update city_name = '" + city_name + "', country_name = '" + country_name + "', start_date = '" + start_date + "', end_date = '" + end_date + "') WHERE trip_id = " + trip_id + ";";
+        }
+    }
     return out;
 }
 
@@ -89,6 +125,7 @@ get_trip_by_id = async (trip_id) => {
 
 module.exports = {
     create_trip,
+    update_trip,
     get_trips_by_user_id,
     get_trip_by_id,
 }

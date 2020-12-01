@@ -12,7 +12,7 @@ router.get('/', async function(req, res) {
         try {
             let trip_data = await model_trips.get_trips_by_user_id(req.session.user_id);
             trip_data = JSON.parse(JSON.stringify(trip_data));
-
+            
             // Determiner si chaque voyage est à venir, en cours ou terminé.
             trip_data.forEach(function(t) {
                 if (Date.parse(t.start_date) > Date.now()) {
@@ -25,7 +25,9 @@ router.get('/', async function(req, res) {
             });
 
             let user_data = await model_users.get_user_by_id(req.session.user_id);
-            trip_data = JSON.parse(JSON.stringify(trip_data));
+            user_data = JSON.parse(JSON.stringify(user_data));
+            user_data.firstname = user_data.firstname.charAt(0).toUpperCase() + user_data.firstname.slice(1);
+            user_data.lastname  = user_data.lastname .charAt(0).toUpperCase() + user_data.lastname .slice(1);
             
             res.render('student_home', { 
                 user_data: user_data,
