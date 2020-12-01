@@ -114,7 +114,7 @@ $('.input-daterange').datepicker({
             }
 
             {{#if mode_create}}  // Si en mode création de voyage
-            if (existing_trip_names.includes($("#trip_name").val())) {  // Si le nom est déjà pris par un autre voyage TODO
+            if (existing_trip_names.includes($("#trip_name").val())) {  // Si le nom est déjà pris par un autre voyage
                 valid_form = false;
                 $("#trip_name").addClass("is-invalid");
             }

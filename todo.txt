@@ -3,6 +3,7 @@
     - Make identical to tse intranet
         - font
         - button style
+        - "Acceuil" en haut à droite de toutes les pages
 
     X Setup basic 'models' files with db and helper functions
     
@@ -16,7 +17,9 @@
 
 
 - Footer:
-    - TODO : Footer tasks
+    - Disconnect
+    - User info
+    - TSE-like Banner
 
 
 X Creation de compte page:

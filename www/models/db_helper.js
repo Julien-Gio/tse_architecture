@@ -1,16 +1,6 @@
 // Contains helper functions for the model files
-
 const db_con = require('./db_connection').makeDb();
 
-// TODO DELETE THIS. ITS USELESS
-// const get_student_count = () => {
-//     let out = 0;
-//     db_con.query("SELECT COUNT(*) AS c FROM Users WHERE role = 'student';", function(err, result, _feilds) {
-//         if (err) throw err;
-//         out = result[0].c;
-//     })
-//     return out; 
-// }
 
 const does_user_exist_by_names = async (firstname, lastname) => {
     let out = false;
