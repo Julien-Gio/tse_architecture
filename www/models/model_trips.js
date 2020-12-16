@@ -95,7 +95,7 @@ update_trip = async (trip_id, city_name, country_name, start_date, end_date) => 
 get_trips_by_user_id = async (user_id) => {
     let out = [];
     try {
-        let res = db_con.query("SELECT * FROM Trips WHERE user_id = " + user_id + " ORDER BY start_date;");
+        let res = await db_con.query("SELECT * FROM Trips WHERE user_id = " + user_id + " ORDER BY start_date;");
         out = res
     } catch (err) {
         console.error(err);

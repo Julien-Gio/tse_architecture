@@ -1,5 +1,32 @@
+html, body {
+    height: 100%;
+}
+
 form {
     max-width: 330px;
     padding: 15px;
     margin: 60px auto;
+}
+
+.page-content {
+    min-height: 100%;  /* pousse le footer vers le bas */
+    height: auto;
+    margin-bottom: -160px;  /* Space for the footer */
+    padding-bottom: 160px;
+}
+
+.page-footer {
+    background-color: #BE1A25;
+    background-image: url("../images/footer.png");
+    background-position: center top;
+    background-repeat: repeat-x;
+    height: 150px;
+    color: #fff;
+    text-align: center;
+    padding: 30px 10px 10px 0;
+    margin-top: 10px;
+}
+
+.page-footer a {
+    color: #d6da3a;
 }

@@ -11,6 +11,8 @@ var loginRouter = require('./controllers/login');
 var signupRouter = require('./controllers/signup');
 var studentHomeRouter = require('./controllers/student_home');
 var studentEditTripRouter = require('./controllers/student_edit_trip');
+var adminHomeRouter = require('./controllers/admin_home');
+var adminEditTripRouter = require('./controllers/admin_edit_trip');
 
 var app = express();
 
@@ -32,6 +34,8 @@ app.use('/login', loginRouter);
 app.use('/signup', signupRouter);
 app.use('/student', studentHomeRouter);
 app.use('/student/edit', studentEditTripRouter);
+app.use('/admin', adminHomeRouter);
+app.use('/admin/edit', adminEditTripRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

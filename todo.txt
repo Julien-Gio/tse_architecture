@@ -1,25 +1,33 @@
 - General:
+    - Readme
     X Favicon
     - Make identical to tse intranet
         - font
         - button style
-        - "Acceuil" en haut à droite de toutes les pages
 
     X Setup basic 'models' files with db and helper functions
     
 
 - Login page:
     X username/password interface
+    X Put pattern on username input
     - Make it identical to TSE intranet login
-        - Banner
-        - form
-        - 'mauvais login' div
+    X 'mauvais login' div
+    X 'erreur' div
+    X 'disconned' div
 
 
-- Footer:
-    - Disconnect
-    - User info
-    - TSE-like Banner
+- Header:
+    - Position / size
+    - Dynamic page title
+    - TSE's images
+    - "Acceuil" en haut à droite
+
+
+X Footer:
+    X Position / size
+    X Disconnect
+    X TSE's image
 
 
 X Creation de compte page:
@@ -76,3 +84,13 @@ X Creation de compte page:
         - Par promo
 
     - Carte interactive
+
+
+- End of project cleanup:
+    - app.js
+    - controllers:
+        - ...
+    - models:
+        - ...
+    - views:
+        - ...

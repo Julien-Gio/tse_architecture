@@ -16,11 +16,22 @@ router.post('/', async function(req, res) {
   try {
     // Check if user exists
     if (await model_users.does_user_exist_by_names(firstname, lastname)) {  
-      // Create session
-      req.session.user_id = await model_users.get_user_id_by_name(firstname, lastname);
+      let uid = await model_users.get_user_id_by_name(firstname, lastname);
+      let role = await model_users.get_user_role(uid);
       
       // Redirect
-      res.redirect("./student");
+      if (role == "admin") {
+        // Create session
+        req.session.user_id = uid;
+        res.redirect("./admin");
+      } else if (role == "student") {
+        // Create session
+        req.session.user_id = uid;
+        res.redirect("./student");
+      } else {
+        throw new Error("Cannot find role of user id " + uid);
+      }
+
     } else {
       // Invalid username
       res.redirect('./?invalid=1');
@@ -28,6 +39,8 @@ router.post('/', async function(req, res) {
 
   } catch (err) {
     console.error(err);
+    // Some error prevented us from logging in
+    res.redirect('./?error=1');
   }
 
 });

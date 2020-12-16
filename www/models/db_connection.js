@@ -19,7 +19,8 @@ function makeDb() {
     host: "localhost",
     user: "site_user",
     password: "tseinfo42",
-    database: "architecture"
+    database: "architecture",
+    timezone : "+00:00"
   });
   
   return {

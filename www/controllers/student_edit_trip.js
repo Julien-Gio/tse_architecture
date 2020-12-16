@@ -20,8 +20,10 @@ router.get('/', async function(req, res) {
             try {
                 req.query.new = 0;  // Make sure that 'new' is set to something
                 data = await model_trips.get_trip_by_id(req.query.trip_id);
-                data.start_date = data.start_date.getFullYear() + "-" + data.start_date.getMonth() + "-" + data.start_date.getDate();
-                data.end_date = data.end_date.getFullYear() + "-" + data.end_date.getMonth() + "-" + data.end_date.getDate();
+                console.log("BEFORE:", data);
+                data.start_date = data.start_date.getUTCFullYear() + "-" + (data.start_date.getUTCMonth()+1) + "-" + data.start_date.getUTCDate();
+                data.end_date = data.end_date.getUTCFullYear() + "-" + (data.end_date.getUTCMonth()+1) + "-" + data.end_date.getUTCDate();
+                console.log("AFTER:",data.start_date);
             } catch (err) {
                 console.error(err);
                 console.log("Trip info not found. Acting as id 'new=1");
@@ -36,8 +38,8 @@ router.get('/', async function(req, res) {
             trip_names.push(t.display_name);
         });
         //trip_names = JSON.stringify(trip_names);
-        console.log(trips);
-        console.log(trip_names);
+        //console.log("Trips:", trips);
+        //console.log(trip_names);
         res.render('student_edit_trip', { 
             mode_create: req.query.new,
             trip_data: data,

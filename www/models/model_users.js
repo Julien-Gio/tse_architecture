@@ -98,10 +98,28 @@ get_user_id_by_name = async (firstname, lastname) => {
 }
 
 
+get_user_role = async (uid) => {
+    // Returns "student" or "admin". If an error happens, returns -1
+    let out = -1;
+    try {
+        let res = await db_con.query("SELECT role FROM Users WHERE uid = " + uid + ";");
+        if (res.length > 0) {
+            out = res[0].role;
+        } else {
+            console.log("Error : user with id " + uid + " was not found in DB.");
+        }
+    } catch (err) {
+        console.error(err);
+    }
+    
+    return out;
+}
+
 module.exports = {
     create_user,
     does_user_exist_by_names,
     get_user_by_id,
     get_user_firstname_by_id,
     get_user_id_by_name,
+    get_user_role,
 }

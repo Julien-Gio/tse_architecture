@@ -8,6 +8,18 @@
             Mauvais login.
         </div>
         {{/if }}
+
+        {{#if show_error_div }}
+        <div class="alert alert-danger alert-sm">
+            Une erreur s'est produite. Réessayez.
+        </div>
+        {{/if }}
+
+        {{#if show_disconnect_div }}
+        <div class="alert alert-info alert-sm">
+            Vous avez bien été déconnecté(e).
+        </div>
+        {{/if }}
         
         <input type="text" class="form-control" id="username" name="username" placeholder="Username" pattern="[a-zA-Z]*\.[a-zA-Z]*">
         <input type="password" class="form-control" id="pswd" name="pswd" placeholder="Password">
