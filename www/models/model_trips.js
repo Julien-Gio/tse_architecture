@@ -1,3 +1,4 @@
+const { query } = require('express');
 const db_helper = require('./db_helper');
 const db_con = require("./db_connection").makeDb();
 
@@ -119,6 +120,50 @@ get_trip_by_id = async (trip_id) => {
         console.error(err);
     }
 
+    return out;
+}
+
+
+get_trips_filtered = async (country, completion_status, trip_name, user_name, promo) => {
+    // completion_status is either 'past', 'ongoing', or 'upcoming'.
+    // All parameters can be "", in which case they will not be considered
+    let out = [];
+    try {
+        let query_inner_join = "";
+        let query_conditions = "";
+
+        if (country != "") {
+            query_conditions += " country_name = " + country;
+        }
+
+        if (completion_status == "past") {
+            query_conditions += " end_date < " + Date.now();
+        } else if (completion_status == "upcoming") {
+            query_conditions += " start_date > " + Date.now();
+        } else if (completion_status == "ongoing") {
+            query_conditions += " start_date < " + Date.now() + " AND end_date > " + Date.now();
+        }
+
+        if (trip_name != "") {
+            query_conditions += " display_name LIKE '%" + trip_name + "%'";
+        }
+
+        if (promo != "") {
+            query_inner_join = " INNER JOIN Users ON Users.uid == Trips.user_id";
+            query_conditions += " "; // TODO
+        }
+
+        if (query_conditions != "") {
+            query_conditions = "WHERE" + query_conditions;
+        }
+        let query_str = "SELECT * FROM Trips" + query_inner_join + query_conditions;
+        console.log(query_str);
+        let res = await db_con.query(query_str);
+        out = res;
+    } catch (err) {
+        console.error(err);
+    }
+    
     return out;
 }
 

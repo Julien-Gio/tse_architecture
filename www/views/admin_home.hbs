@@ -1,0 +1,44 @@
+<h1>Mobilités TSE</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6" id="panel-left">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{user_data.firstname}} {{user_data.lastname}}, bienvenue.</h5>
+                    <p class="card-text">Vous avez un compte adminitrateur.</p>
+                    <p class="card-text">Criteres de recherche ici.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6" id="panel-trips">
+            <div class="card">
+                <div class="card-header btn-toolbar justify-content-between">
+                    <p class="h5 my-auto">Voyages</p>
+                    <div class="btn-group" role="group" aria-label="Switch">
+                        <button type="button" class="btn btn-danger flex-auto">Liste</button>
+                        <button type="button" class="btn btn-danger flex-auto">Carte</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="list-group" id="trip-list">
+                        {{!-- https://getbootstrap.com/docs/4.0/migration/#list-groups --}}
+                        {{#each trips}}
+                        <a class="list-group-item list-group-item-action list-group-item d-flex justify-content-between align-items-center" href="/student/edit?trip_id={{this.trip_id}}">
+                            {{this.display_name}} - {{this.country_name}}
+                            {{#if this.upcoming}}
+                            <span class="badge badge-secondary badge-pill">A venir</span>
+                            {{/if}}
+                            {{#if this.current}}
+                            <span class="badge badge-primary badge-pill">En cours</span>
+                            {{/if}}
+                            {{#if this.past}}
+                            <span class="badge badge-light badge-pill">Terminé</span>
+                            {{/if}}
+                        </a>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
