@@ -129,10 +129,10 @@ get_trips_filtered = async (country, completion_status, trip_name, user_name, pr
     // All parameters can be "", in which case they will not be considered
     let out = [];
     try {
-        let query_inner_join = "";
+        let query_inner_join = " INNER JOIN Users ON Users.uid = Trips.user_id";
         let query_conditions = "";
 
-        if (country != "") {
+        if (country && country != "") {
             query_conditions += " country_name = " + country;
         }
 
@@ -142,24 +142,27 @@ get_trips_filtered = async (country, completion_status, trip_name, user_name, pr
             query_conditions += " start_date > " + Date.now();
         } else if (completion_status == "ongoing") {
             query_conditions += " start_date < " + Date.now() + " AND end_date > " + Date.now();
+        } else {
+            // Nada
         }
 
-        if (trip_name != "") {
+        if (trip_name && trip_name != "") {
             query_conditions += " display_name LIKE '%" + trip_name + "%'";
         }
 
-        if (promo != "") {
-            query_inner_join = " INNER JOIN Users ON Users.uid == Trips.user_id";
+        if (promo && promo != "") {
+            // query_inner_join = " INNER JOIN Users ON Users.uid = Trips.user_id";
             query_conditions += " "; // TODO
         }
 
         if (query_conditions != "") {
             query_conditions = "WHERE" + query_conditions;
         }
-        let query_str = "SELECT * FROM Trips" + query_inner_join + query_conditions;
-        console.log(query_str);
+        let query_str = "SELECT * FROM Trips" + query_inner_join + query_conditions + " ORDER BY start_date;";
+        console.log("query: ", query_str);
         let res = await db_con.query(query_str);
         out = res;
+        console.log(res);
     } catch (err) {
         console.error(err);
     }
@@ -173,4 +176,5 @@ module.exports = {
     update_trip,
     get_trips_by_user_id,
     get_trip_by_id,
+    get_trips_filtered
 }

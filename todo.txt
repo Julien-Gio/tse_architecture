@@ -1,5 +1,6 @@
 - General:
     - Readme
+        - Ce que j'aurais fait différament => REST API maybe
     X Favicon
     - Make identical to tse intranet
         - font

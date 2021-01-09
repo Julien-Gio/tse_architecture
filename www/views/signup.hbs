@@ -22,18 +22,23 @@
         <div class="form-group" id="div_promo">
             <label for="promo">Promotion :</label>
             <select class="form-control" id="promo" name="promo">
-                <option>FISE 1</option>
-                <option>FISE 2</option>
-                <option>FISE 3</option>
-                <option>CITISE 1</option>
-                <option>CITISE 2</option>
             </select>
         </div> 
         
         <button class="btn btn-lg btn-danger btn-block" type="submit">Valider</button>
     </form>
 </div>
+
+<script src="/javascripts/promos.js"></script>
+
 <script>
+    for (let p in promos) {
+        $("#promo").append($('<option>', {
+            value: p,
+            text: promos[p]
+        }));
+    }
+
     // When the user selects an account type, show or hide the "promo" accordingly
     $("input[name='account_type']").change(function() {
         if ($("#radio_student").prop("checked") === true) {
@@ -42,4 +47,6 @@
             $("#div_promo").slideUp();  // Hide the promo choice
         }
     });
+
+    
 </script>

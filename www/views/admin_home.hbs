@@ -1,16 +1,43 @@
 <h1>Mobilités TSE</h1>
-<div class="container">
+<div class="container mt-3">
     <div class="row">
-        <div class="col-sm-6" id="panel-left">
+        <div class="col-4" id="panel-left">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">{{user_data.firstname}} {{user_data.lastname}}, bienvenue.</h5>
                     <p class="card-text">Vous avez un compte adminitrateur.</p>
                     <p class="card-text">Criteres de recherche ici.</p>
+                    <form class="form my-0">
+                        <div class="form-group">
+                            <label for="country">Nom de l'étudiant :</label>
+                            <input id="name" type="text" class="form-control" name="student_name"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="country">Pays :</label>
+                            <select id="country" class="form-control" name="country"></select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="country">Status :</label>
+                            <select id="country" class="form-control" name="completion_status">
+                                <option value="">Tous</option>
+                                <option value="past">Terminé</option>
+                                <option value="ongoing">En cours</option>
+                                <option value="upcoming">A venir</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="div_promo">
+                            <label for="promo">Promotion :</label>
+                            <select class="form-control" id="promo" name="promo">
+                            </select>
+                        </div> 
+                    </form>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6" id="panel-trips">
+        <div class="col-8" id="panel-trips">
             <div class="card">
                 <div class="card-header btn-toolbar justify-content-between">
                     <p class="h5 my-auto">Voyages</p>
@@ -24,7 +51,7 @@
                         {{!-- https://getbootstrap.com/docs/4.0/migration/#list-groups --}}
                         {{#each trips}}
                         <a class="list-group-item list-group-item-action list-group-item d-flex justify-content-between align-items-center" href="/student/edit?trip_id={{this.trip_id}}">
-                            {{this.display_name}} - {{this.country_name}}
+                            {{this.display_name}} - {{this.country_name}} - {{this.lastname}}
                             {{#if this.upcoming}}
                             <span class="badge badge-secondary badge-pill">A venir</span>
                             {{/if}}
@@ -42,3 +69,35 @@
         </div>
     </div>
 </div>
+
+<script src="/javascripts/countries.js"></script>
+<script src="/javascripts/promos.js"></script>
+
+
+<script>
+    // Add countries to select
+    $("#country").append($('<option>', {
+        value: "",
+        text: "Tous"
+    }));
+
+    for (let c in countries) {
+        $("#country").append($('<option>', {
+            value: c,
+            text: countries[c]
+        }));
+    }
+
+    // Add promos to select
+    $("#promo").append($('<option>', {
+        value: "",
+        text: "Toutes"
+    }));
+
+    for (let p in promos) {
+        $("#promo").append($('<option>', {
+            value: p,
+            text: promos[p]
+        }));
+    }
+</script>
