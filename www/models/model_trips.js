@@ -83,7 +83,9 @@ update_trip = async (trip_id, city_name, country_name, start_date, end_date) => 
     // Update the trip
     if (out == "valid") {
         try {
-            await db_con.query("UPDATE Trips SET city_name = '" + city_name + "', country_name = '" + country_name + "', start_date = '" + start_date + "', end_date = '" + end_date + "' WHERE trip_id = " + trip_id + ";");
+            let query_str = "UPDATE Trips SET city_name = '" + city_name + "', country_name = '" + country_name + "', start_date = '" + start_date + "', end_date = '" + end_date + "' WHERE trip_id = " + trip_id + ";";
+            await db_con.query(query_str);
+            console.log(query_str);
         } catch (err) {
             console.error(err);
             out = "Unable to update city_name = '" + city_name + "', country_name = '" + country_name + "', start_date = '" + start_date + "', end_date = '" + end_date + "') WHERE trip_id = " + trip_id + ";";
@@ -136,12 +138,14 @@ get_trips_filtered = async (country, completion_status, trip_name, user_name, pr
             query_conditions += " country_name = " + country;
         }
 
+        let today = new Date;
+        today = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         if (completion_status == "past") {
-            query_conditions += " end_date < " + Date.now();
+            query_conditions += " end_date < '" + today + "'";
         } else if (completion_status == "upcoming") {
-            query_conditions += " start_date > " + Date.now();
+            query_conditions += " start_date > '" + today + "'";
         } else if (completion_status == "ongoing") {
-            query_conditions += " start_date < " + Date.now() + " AND end_date > " + Date.now();
+            query_conditions += " start_date < '" + today + "' AND end_date > '" + today + "'";
         } else {
             // Nada
         }
@@ -151,12 +155,11 @@ get_trips_filtered = async (country, completion_status, trip_name, user_name, pr
         }
 
         if (promo && promo != "") {
-            // query_inner_join = " INNER JOIN Users ON Users.uid = Trips.user_id";
             query_conditions += " "; // TODO
         }
 
         if (query_conditions != "") {
-            query_conditions = "WHERE" + query_conditions;
+            query_conditions = " WHERE" + query_conditions;
         }
         let query_str = "SELECT * FROM Trips" + query_inner_join + query_conditions + " ORDER BY start_date;";
         console.log("query: ", query_str);
@@ -171,10 +174,57 @@ get_trips_filtered = async (country, completion_status, trip_name, user_name, pr
 }
 
 
+get_trip_count_by_country = async (country, completion_status, trip_name, user_name, promo) => {
+    let out = [];
+    try {
+        let query_inner_join = " INNER JOIN Users ON Users.uid = Trips.user_id";
+        let query_conditions = "";
+
+        if (country && country != "") {
+            query_conditions += " country_name = " + country;
+        }
+
+        let today = new Date;
+        today = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        if (completion_status == "past") {
+            query_conditions += " end_date < '" + today + "'";
+        } else if (completion_status == "upcoming") {
+            query_conditions += " start_date > '" + today + "'";
+        } else if (completion_status == "ongoing") {
+            query_conditions += " start_date < '" + today + "' AND end_date > '" + today + "'";
+        } else {
+            // Nada
+        }
+
+        if (trip_name && trip_name != "") {
+            query_conditions += " display_name LIKE '%" + trip_name + "%'";
+        }
+
+        if (promo && promo != "") {
+            query_conditions += " "; // TODO
+        }
+
+        if (query_conditions != "") {
+            query_conditions = " WHERE" + query_conditions;
+        }
+
+        let query_str = "SELECT country_name, COUNT(*) AS count FROM Trips " + query_inner_join + query_conditions + " GROUP BY country_name";
+        let res = await db_con.query(query_str);
+        out = res;
+        console.log(res);
+    } catch (err) {
+        console.error(err);
+    }
+
+    return out;
+}
+
+
 module.exports = {
     create_trip,
     update_trip,
     get_trips_by_user_id,
     get_trip_by_id,
-    get_trips_filtered
+    get_trips_filtered,
+    get_trip_count_by_country
 }

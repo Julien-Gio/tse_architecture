@@ -39,6 +39,7 @@ X Creation de compte page:
 
 - Student landing page:
     X Make the view
+    - Prevent Admins from seeing it
     X Message de bienvenue
         X Afficher le message
         X Capitaliser le nom/prenom
@@ -76,18 +77,22 @@ X Creation de compte page:
 
 
 - Admin landing page:
-    - Make the base view
-    - Tableau avec tous les voyage (trié alphabetiquement par date de début)
+    X Make the base view
+    - Prevent Students from seeing it
+    X Tableau avec tous les voyage (trié par date de début)
     - Options de filtrage:
         - Par pays
         - Par ville
         - Par nom/prenom
         - Par promo
 
-    - Carte interactive
+    - Carte 'interactive':
+        - Base
+        X Afficher les voyages de la liste
 
 
 - End of project cleanup:
+    - responsiveness tests + adjustments
     - app.js
     - controllers:
         - ...

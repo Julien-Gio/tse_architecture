@@ -12,5 +12,19 @@ une ville et un pays de destination, une date de début et de fin de séjour.
     date de soumission
     b. La modification et la suppression d’une demande préexistante
     c. La recherche de de demandes par étudiant, par pays, par date, par promo
-    d. LA recherche Multicritère (par promo et pays par exemple)
+    d. La recherche multicritère (par promo et pays par exemple)
 4. L’affichage sur une carte des étudiants en mobilité.
+
+# Général
+Responsive
+
+# L'interface Administrateur
+## Recherche
+TODO
+
+## La liste
+TODO
+
+## La carte
+La carte affiche les voyages dans la liste en les groupant pas pays.
+La carte ne s'affiche pas sur mobile (Ordinateur et grandes tabletes uniquement).

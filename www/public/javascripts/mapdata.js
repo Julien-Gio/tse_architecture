@@ -10,7 +10,7 @@ var simplemaps_worldmap_mapdata={
 		state_description: "State description",
     state_color: "#88A4BC",
     state_hover_color: "#3B729F",
-    state_url: "https://simplemaps.com",
+    state_url: "",
     border_size: 1.5,
     border_color: "#ffffff",
     all_states_inactive: "no",
@@ -22,7 +22,7 @@ var simplemaps_worldmap_mapdata={
     location_opacity: 0.8,
     location_hover_opacity: 1,
     location_url: "",
-    location_size: 25,
+    location_size: 15,
     location_type: "square",
     location_border_color: "#FFFFFF",
     location_border: 2,
@@ -1572,31 +1572,31 @@ var simplemaps_worldmap_mapdata={
     }
   },
   locations: {
-    "0": {
-      name: "Paris",
-      lat: "48.866666670",
-      lng: "2.333333333",
-      color: "default",
-      description: "default",
-      url: "default"
-    },
-    "1": {
-      name: "Tokyo",
-      lat: "35.666666670",
-      lng: "139.750000000",
-      color: "default",
-      description: "default",
-      url: "default"
-    },
-    "3": {
-      name: "New York",
-      lat: "40.71",
-      lng: "-74.0059731",
-      description: "default",
-      color: "default",
-      url: "default",
-      size: "default"
-    }
+    // "0": {
+    //   name: "Paris",
+    //   lat: "48.866666670",
+    //   lng: "2.333333333",
+    //   color: "default",
+    //   description: "default",
+    //   url: "default"
+    // },
+    // "1": {
+    //   name: "Tokyo",
+    //   lat: "35.666666670",
+    //   lng: "139.750000000",
+    //   color: "default",
+    //   description: "default",
+    //   url: "default"
+    // },
+    // "3": {
+    //   name: "New York",
+    //   lat: "40.71",
+    //   lng: "-74.0059731",
+    //   description: "default",
+    //   color: "default",
+    //   url: "default",
+    //   size: "default"
+    // }
   },
   labels: {}
 };

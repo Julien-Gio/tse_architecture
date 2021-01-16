@@ -1,12 +1,13 @@
+
 <h1>Mobilités TSE</h1>
 <div class="container mt-3">
     <div class="row">
-        <div class="col-4" id="panel-left">
+        <div class="col-12 col-lg-4 my-2" id="panel-left">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">{{user_data.firstname}} {{user_data.lastname}}, bienvenue.</h5>
                     <p class="card-text">Vous avez un compte adminitrateur.</p>
-                    <p class="card-text">Criteres de recherche ici.</p>
+                    <p class="card-text mb-0">Criteres de recherche</p>
                     <form class="form my-0">
                         <div class="form-group">
                             <label for="country">Nom de l'étudiant :</label>
@@ -33,20 +34,21 @@
                             <select class="form-control" id="promo" name="promo">
                             </select>
                         </div> 
+                        <button class="btn btn-danger float-right px-4">Recherche</button>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="col-8" id="panel-trips">
+        <div class="col-12 col-lg-8 my-2" id="panel-trips">
             <div class="card">
                 <div class="card-header btn-toolbar justify-content-between">
                     <p class="h5 my-auto">Voyages</p>
                     <div class="btn-group" role="group" aria-label="Switch">
-                        <button type="button" class="btn btn-danger flex-auto">Liste</button>
-                        <button type="button" class="btn btn-danger flex-auto">Carte</button>
+                        <button type="button" id="btn_list" class="btn btn-danger flex-auto">Liste</button>
+                        <button type="button" id="btn_map" class="btn btn-danger flex-auto">Carte</button>
                     </div>
                 </div>
-                <div class="card-body">
+                <div id="card-list" class="card-body">
                     <div class="list-group" id="trip-list">
                         {{!-- https://getbootstrap.com/docs/4.0/migration/#list-groups --}}
                         {{#each trips}}
@@ -65,6 +67,9 @@
                         {{/each}}
                     </div>
                 </div>
+                <div id="card-map" class="card-body" hidden>
+                    <div id="map"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -72,6 +77,7 @@
 
 <script src="/javascripts/countries.js"></script>
 <script src="/javascripts/promos.js"></script>
+<script src="/javascripts/country-codes-lat-long.js"></script>		
 
 
 <script>
@@ -100,4 +106,45 @@
             text: promos[p]
         }));
     }
+
+    document.getElementById("btn_list").addEventListener("click", (ev) => {
+            console.log("List click");
+            document.getElementById("card-map").hidden = true;
+            document.getElementById("card-list").hidden = false;
+        });
+        
+    document.getElementById("btn_map").addEventListener("click", (ev) => {
+            console.log("Map click");
+            document.getElementById("card-map").hidden = false;
+            document.getElementById("card-list").hidden = true;
+        });
+
 </script>
+
+<script type="text/javascript" src="/javascripts/mapdata.js"></script>		
+
+<script>
+    const country_count = {{{country_count}}};
+    let loc_index = 0;
+    for (let c of country_codes_lat_long["ref_country_codes"]) {
+        for (let c_count of country_count) {        
+            if (c["alpha2"] == c_count["country_name"]) {
+                simplemaps_worldmap_mapdata.locations[loc_index.toString()] = {
+                    name: c["country"],
+                    lat: c["latitude"],
+                    lng: c["longitude"],
+                    color: "default",
+                    description: c_count["count"].toString() + " voyage(s) ici.",
+                    url: "default"
+                };
+                loc_index += 1;
+                break;
+            }
+        }
+    }
+
+    console.log(simplemaps_worldmap_mapdata.locations);
+</script>
+
+{{!-- https://simplemaps.com/docs/ --}}
+<script  type="text/javascript" src="/javascripts/worldmap.js"></script>
