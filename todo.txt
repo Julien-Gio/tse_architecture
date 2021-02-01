@@ -39,7 +39,7 @@ X Creation de compte page:
 
 - Student landing page:
     X Make the view
-    - Prevent Admins from seeing it
+    X Prevent Admins from seeing it
     X Message de bienvenue
         X Afficher le message
         X Capitaliser le nom/prenom
@@ -78,7 +78,7 @@ X Creation de compte page:
 
 - Admin landing page:
     X Make the base view
-    - Prevent Students from seeing it
+    X Prevent Students from seeing it
     X Tableau avec tous les voyage (trié par date de début)
     X Options de filtrage:
         X Les mettre à jour quand une option est selectionnée
