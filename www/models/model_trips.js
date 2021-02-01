@@ -126,7 +126,7 @@ get_trip_by_id = async (trip_id) => {
 }
 
 
-get_trips_filtered = async (country, completion_status, trip_name, user_name, promo) => {
+get_trips_filtered = async (country, completion_status, user_name, promo) => {
     // completion_status is either 'past', 'ongoing', or 'upcoming'.
     // All parameters can be "", in which case they will not be considered
     let out = [];
@@ -135,31 +135,31 @@ get_trips_filtered = async (country, completion_status, trip_name, user_name, pr
         let query_conditions = "";
 
         if (country && country != "") {
-            query_conditions += " country_name = " + country;
+            query_conditions += " AND country_name = '" + country + "'";
         }
 
         let today = new Date;
         today = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         if (completion_status == "past") {
-            query_conditions += " end_date < '" + today + "'";
+            query_conditions += " AND end_date < '" + today + "'";
         } else if (completion_status == "upcoming") {
-            query_conditions += " start_date > '" + today + "'";
+            query_conditions += " AND start_date > '" + today + "'";
         } else if (completion_status == "ongoing") {
-            query_conditions += " start_date < '" + today + "' AND end_date > '" + today + "'";
+            query_conditions += " AND start_date < '" + today + "' AND end_date > '" + today + "'";
         } else {
             // Nada
         }
 
-        if (trip_name && trip_name != "") {
-            query_conditions += " display_name LIKE '%" + trip_name + "%'";
+        if (promo && promo != "") {
+            query_conditions += " AND id_promo ='" + promo + "'"; // TODO
         }
 
-        if (promo && promo != "") {
-            query_conditions += " "; // TODO
+        if (user_name && user_name != "") {
+            query_conditions += " AND CONCAT(firstname, ' ', lastname) LIKE '%" + user_name + "%'";
         }
 
         if (query_conditions != "") {
-            query_conditions = " WHERE" + query_conditions;
+            query_conditions = " WHERE" + query_conditions.substring(4);  // substring pour retirer le premier ' AND'
         }
         let query_str = "SELECT * FROM Trips" + query_inner_join + query_conditions + " ORDER BY start_date;";
         console.log("query: ", query_str);
@@ -174,8 +174,9 @@ get_trips_filtered = async (country, completion_status, trip_name, user_name, pr
 }
 
 
-get_trip_count_by_country = async (country, completion_status, trip_name, user_name, promo) => {
+get_trip_count_by_country = async (country, completion_status, user_name, promo) => {
     let out = [];
+    return out;
     try {
         let query_inner_join = " INNER JOIN Users ON Users.uid = Trips.user_id";
         let query_conditions = "";
@@ -196,12 +197,12 @@ get_trip_count_by_country = async (country, completion_status, trip_name, user_n
             // Nada
         }
 
-        if (trip_name && trip_name != "") {
-            query_conditions += " display_name LIKE '%" + trip_name + "%'";
-        }
-
         if (promo && promo != "") {
             query_conditions += " "; // TODO
+        }
+
+        if (user_name && user_name != "") {
+            query_conditions += " CONCAT(firstname, ' ', lastname) LIKE '%" + user_name + "%'";
         }
 
         if (query_conditions != "") {

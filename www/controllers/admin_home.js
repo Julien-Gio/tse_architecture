@@ -12,12 +12,11 @@ router.get('/', async function(req, res) {
         try {
             let country = req.query.country;
             let completion_status = req.query.completion_status; 
-            let trip_name = req.query.trip_name; 
-            let user_name = req.query.user_name;
+            let student_name = req.query.student_name;
             let promo = req.query.promo;
             console.log("QUERY :", req.query);
 
-            let trip_data = await model_trips.get_trips_filtered(country, completion_status, trip_name, user_name, promo);
+            let trip_data = await model_trips.get_trips_filtered(country, completion_status, student_name, promo);
             trip_data = JSON.parse(JSON.stringify(trip_data));
             
             // Determiner si chaque voyage est à venir, en cours ou terminé.
@@ -36,12 +35,13 @@ router.get('/', async function(req, res) {
             user_data.firstname = user_data.firstname.charAt(0).toUpperCase() + user_data.firstname.slice(1);
             user_data.lastname  = user_data.lastname .charAt(0).toUpperCase() + user_data.lastname .slice(1);
 
-            let country_count = await model_trips.get_trip_count_by_country(country, completion_status, trip_name, user_name, promo);
+            let country_count = await model_trips.get_trip_count_by_country(country, completion_status, student_name, promo);
 
             res.render('admin_home', {
                 user_data: user_data,
                 trips: trip_data,
-                country_count: JSON.stringify(country_count)
+                country_count: JSON.stringify(country_count),
+                form_data: {country, completion_status, student_name, promo}
             });
         } catch (err) {
             console.error(err);

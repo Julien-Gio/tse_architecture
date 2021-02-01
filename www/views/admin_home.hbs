@@ -10,8 +10,8 @@
                     <p class="card-text mb-0">Criteres de recherche</p>
                     <form class="form my-0">
                         <div class="form-group">
-                            <label for="country">Nom de l'étudiant :</label>
-                            <input id="name" type="text" class="form-control" name="student_name"/>
+                            <label for="student_name">Nom de l'étudiant :</label>
+                            <input id="student_name" type="text" class="form-control" name="student_name" value="{{form_data.student_name}}"/>
                         </div>
 
                         <div class="form-group">
@@ -20,8 +20,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="country">Status :</label>
-                            <select id="country" class="form-control" name="completion_status">
+                            <label for="completion_status">Status :</label>
+                            <select id="completion_status" class="form-control" name="completion_status">
                                 <option value="">Tous</option>
                                 <option value="past">Terminé</option>
                                 <option value="ongoing">En cours</option>
@@ -81,6 +81,9 @@
 
 
 <script>
+    // Set status
+    $("#completion_status").val("{{{form_data.completion_status}}}");
+
     // Add countries to select
     $("#country").append($('<option>', {
         value: "",
@@ -93,6 +96,7 @@
             text: countries[c]
         }));
     }
+    $("#country").val("{{{form_data.country}}}");
 
     // Add promos to select
     $("#promo").append($('<option>', {
@@ -106,6 +110,7 @@
             text: promos[p]
         }));
     }
+    $("#promo").val("{{{form_data.promo}}}");
 
     document.getElementById("btn_list").addEventListener("click", (ev) => {
             console.log("List click");
