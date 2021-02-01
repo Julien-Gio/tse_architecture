@@ -113,13 +113,11 @@
     $("#promo").val("{{{form_data.promo}}}");
 
     document.getElementById("btn_list").addEventListener("click", (ev) => {
-            console.log("List click");
             document.getElementById("card-map").hidden = true;
             document.getElementById("card-list").hidden = false;
         });
         
     document.getElementById("btn_map").addEventListener("click", (ev) => {
-            console.log("Map click");
             document.getElementById("card-map").hidden = false;
             document.getElementById("card-list").hidden = true;
         });
@@ -147,8 +145,6 @@
             }
         }
     }
-
-    console.log(simplemaps_worldmap_mapdata.locations);
 </script>
 
 {{!-- https://simplemaps.com/docs/ --}}

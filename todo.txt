@@ -87,13 +87,14 @@ X Creation de compte page:
         X Par nom/prenom
         X Par promo
 
-    - Carte 'interactive':
-        - Base
+    X Carte 'interactive':
+        X Base
         X Afficher les voyages de la liste
 
 
 - End of project cleanup:
     - responsiveness tests + adjustments
+        - Fix carte qui a une taille fixes
     - app.js
     - controllers:
         - ...
