@@ -21,11 +21,23 @@
         </div>
         {{/if }}
         
-        <input type="text" class="form-control" id="username" name="username" placeholder="Username" pattern="[a-zA-Z]*\.[a-zA-Z]*">
-        <input type="password" class="form-control" id="pswd" name="pswd" placeholder="Password">
+        <input type="text" class="form-control" id="username" name="username" placeholder="nom.prenom" pattern="[a-zA-Z]*\.[a-zA-Z]*">
+        <input type="password" class="form-control" id="pswd" name="pswd" placeholder="mot de passe">
     
-        <button class="btn btn-lg btn-danger btn-block" type="submit">Connexion</button>
+        <button class="btn btn-lg btn-danger btn-block my-2" type="submit">Connexion</button>
 
         <a class="" href="/signup">Créer un compte.</a>
     </form>
 </div>
+
+<style>
+input[type="text"] {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-bottom: -1px;
+}
+input[type="password"] {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+</style>
