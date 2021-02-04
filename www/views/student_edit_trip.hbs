@@ -2,7 +2,7 @@
 <h1>Mobilités TSE</h1>
 
 <div class="container">
-    <form class="needs-validation" method="POST" {{#if mode_create}} action="/student/edit/insert" {{else}} action="/student/edit/update" {{/if}} novalidate>
+    <form class="needs-validation mb-2" method="POST" {{#if mode_create}} action="/student/edit/insert" {{else}} action="/student/edit/update" {{/if}} novalidate>
         <input type="hidden" name="trip_id" value="{{trip_data.trip_id}}">
         <h4 class="mt-4">{{#if mode_create}}Nouveau{{else}}Modification de{{/if}} voyage</h4>
         <hr class="mt-0 mb-2">
@@ -52,13 +52,26 @@
             Voyage
         </button>
     </form>
+    
+    {{#unless mode_create}}
+    <hr/>
+    <form method="POST" action="/student/edit/delete" class="text-center mt-2">
+        <input type="hidden" name="trip_id" value="{{trip_data.trip_id}}">
+        <button class="btn btn-outline-dark btn-block font-italic" type="button" onclick="onSupClick()">
+            Supprimer Voyage ?
+        </button>
+        <button id="btn-conf-delete" class="btn btn-outline-danger btn-sm font-weight-bold mt-2" type="submit" hidden>
+            Oui, supprimer le voyage.
+        </button>
+    </form>
+    {{/unless}}
+
 </div>
 
 <script src="/javascripts/countries.js"></script>
 
 <script>
 existing_trip_names = [{{#each existing_trip_names}}"{{this}}",{{/each}}];
-
 
 // Add countries to select
 for (let c in countries) {
@@ -67,7 +80,6 @@ for (let c in countries) {
         text: countries[c]
     }));
 }
-
 
 if (!{{mode_create}}) {
     // Préremplir le formulaire
@@ -88,6 +100,10 @@ $('.input-daterange').datepicker({
     autoclose: true,
     todayHighlight: true
 });
+
+function onSupClick() {
+    document.getElementById("btn-conf-delete").hidden = false;
+}
 </script>
 
 

@@ -37,7 +37,7 @@ X Creation de compte page:
     X Create user
 
 
-- Student landing page:
+X Student landing page:
     X Make the view
     X Prevent Admins from seeing it
     X Message de bienvenue
@@ -49,10 +49,10 @@ X Creation de compte page:
         X Afficher les desinations
         X Différencier les voyages passés, en cours et terminés
     
-    - Option pour effacer un voyage
-        - Bouton
-        - Implementation
-        - Popup de confirmation quand l'utilisateur veut effacer un voyage
+    X Option pour effacer un voyage
+        X Bouton
+        X Implementation
+        X Popup de confirmation quand l'utilisateur veut effacer un voyage
     
     X Click sur un voyage pour le modifier
     X Bouton pour créer un nouveau voyage
@@ -76,7 +76,7 @@ X Creation de compte page:
         X Server side data validation (with error message)
 
 
-- Admin landing page:
+X Admin landing page:
     X Make the base view
     X Prevent Students from seeing it
     X Tableau avec tous les voyage (trié par date de début)

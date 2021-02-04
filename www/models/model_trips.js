@@ -95,6 +95,21 @@ update_trip = async (trip_id, city_name, country_name, start_date, end_date) => 
 }
 
 
+delete_trip = async (trip_id) => {
+    let out = "valid";
+    try {
+        let query_str = "DELETE FROM Trips WHERE trip_id = " + trip_id + ";";
+        await db_con.query(query_str);
+        console.log(query_str);
+    } catch (err) {
+        console.error(err);
+        out = "Unable to delete trip (id=" + trip_id + ").";
+    }
+
+    return out;
+}
+
+
 get_trips_by_user_id = async (user_id) => {
     let out = [];
     try {
@@ -223,6 +238,7 @@ get_trip_count_by_country = async (country, completion_status, user_name, promo)
 module.exports = {
     create_trip,
     update_trip,
+    delete_trip,
     get_trips_by_user_id,
     get_trip_by_id,
     get_trips_filtered,

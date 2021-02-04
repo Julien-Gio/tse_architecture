@@ -20,10 +20,10 @@ router.get('/', async function(req, res) {
             try {
                 req.query.new = 0;  // Make sure that 'new' is set to something
                 data = await model_trips.get_trip_by_id(req.query.trip_id);
-                console.log("BEFORE:", data);
+                // console.log("BEFORE:", data);
                 data.start_date = data.start_date.getUTCFullYear() + "-" + (data.start_date.getUTCMonth()+1) + "-" + data.start_date.getUTCDate();
                 data.end_date = data.end_date.getUTCFullYear() + "-" + (data.end_date.getUTCMonth()+1) + "-" + data.end_date.getUTCDate();
-                console.log("AFTER:",data.start_date);
+                // console.log("AFTER:", data.start_date);
             } catch (err) {
                 console.error(err);
                 console.log("Trip info not found. Acting as id 'new=1");
@@ -37,9 +37,7 @@ router.get('/', async function(req, res) {
         trips.forEach(t => {
             trip_names.push(t.display_name);
         });
-        //trip_names = JSON.stringify(trip_names);
-        //console.log("Trips:", trips);
-        //console.log(trip_names);
+
         res.render('student_edit_trip', { 
             mode_create: req.query.new,
             trip_data: data,
@@ -78,10 +76,10 @@ router.post('/insert', async function(req, res) {
 
 
 router.post('/update', async function(req, res) {
-    // if (req.session.user_id === -1 || req.session.user_id === undefined) {
-    //     // Not logged in, redirect to login page (aka index)
-    //     res.redirect('/');
-    // } else {
+    if (req.session.user_id === -1 || req.session.user_id === undefined) {
+        // Not logged in, redirect to login page (aka index)
+        res.redirect('/');
+    } else {
         try {
             let data = {
                 trip_id: req.body.trip_id,
@@ -90,19 +88,43 @@ router.post('/update', async function(req, res) {
                 start_date: req.body.start,
                 end_date: req.body.end
             };
-            console.log(data);
-            console.log(req.body);
+
             let error = await model_trips.update_trip(data.trip_id, data.city_name, data.country_name, data.start_date, data.end_date);
     
             if (error == "valid") {
-                res.render('student_edit_trip_success', { title: 'Voyage modifié'});
+                res.render('student_edit_trip_success', { title: 'Voyage modifié' });
             } else {
-                res.render('student_edit_trip_failure', { title: 'Erreur lors de la modification du voyage.', error_str: error});
+                res.render('student_edit_trip_failure', { title: 'Erreur lors de la modification du voyage.', error_str: error });
             }
         } catch (err) {
             console.error(err);
         }
-    // }
+    }
+});
+
+
+router.post('/delete', async function(req, res) {
+    if (req.session.user_id === -1 || req.session.user_id === undefined) {
+        // Not logged in, redirect to login page (aka index)
+        res.redirect('/');
+    } else {
+        try {
+            let data = {
+                trip_id: req.body.trip_id,
+            };
+            console.log(data);
+            console.log(req.body);
+            let response = await model_trips.delete_trip(data.trip_id);
+    
+            if (response == "valid") {
+                res.render('student_edit_trip_success', { title: 'Voyage supprimé'});
+            } else {
+                res.render('student_edit_trip_failure', { title: 'Erreur lors de la suppersion du voyage.', error_str: response});
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    }
 });
 
 module.exports = router;
