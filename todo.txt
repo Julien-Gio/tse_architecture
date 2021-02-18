@@ -2,27 +2,16 @@
     - Readme
         - Ce que j'aurais fait différament => REST API maybe
     X Favicon
-    - Make identical to tse intranet
-        - font
-        - button style
-
     X Setup basic 'models' files with db and helper functions
     
 
-- Login page:
+X Login page:
     X username/password interface
     X Put pattern on username input
-    - Make it identical to TSE intranet login
+    X Make it identical to TSE intranet login
     X 'mauvais login' div
     X 'erreur' div
     X 'disconned' div
-
-
-- Header:
-    - Position / size
-    - Dynamic page title
-    - TSE's images
-    - "Acceuil" en haut à droite
 
 
 X Footer:
@@ -91,14 +80,3 @@ X Admin landing page:
         X Base
         X Afficher les voyages de la liste
 
-
-- End of project cleanup:
-    - responsiveness tests + adjustments
-        - Fix carte qui a une taille fixes
-    - app.js
-    - controllers:
-        - ...
-    - models:
-        - ...
-    - views:
-        - ...

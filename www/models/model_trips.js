@@ -166,7 +166,7 @@ get_trips_filtered = async (country, completion_status, user_name, promo) => {
         }
 
         if (promo && promo != "") {
-            query_conditions += " AND id_promo ='" + promo + "'"; // TODO
+            query_conditions += " AND id_promo ='" + promo + "'";
         }
 
         if (user_name && user_name != "") {
@@ -212,7 +212,7 @@ get_trip_count_by_country = async (country, completion_status, user_name, promo)
         }
 
         if (promo && promo != "") {
-            query_conditions += " AND id_promo ='" + promo + "'"; // TODO
+            query_conditions += " AND id_promo ='" + promo + "'";
         }
 
         if (user_name && user_name != "") {
