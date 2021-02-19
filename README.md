@@ -2,6 +2,10 @@
 
 ---
 
+**Une version PDF du readme est téléchargable sur [ce lien Drive](https://drive.google.com/drive/folders/1Hs36fEh_OyOfGoyFjD4g-RxSjKb5skC1?usp=sharing). Vous y trouverez aussi une vidéo démonstration de 4 minutes pour mieux comprendre le projet.**
+
+---
+
 # Présentation du rendu
 Ce repository contient le code source pour un site type intranet pour la création et la gestion de mobilités étudiantes. 
 La platforme est accessible pour des comptes de type étudtants ou administrateurs, plus de détails se trouvent dans la partie **Fonctionnalités**.
@@ -34,7 +38,7 @@ Tables (*PK* : Primary Key, *FK* : Foreign Key, *U* : Unique) :
 
 ## Landing
 N'etant pas encore connécté, seul deux pages sont accésibles : `/` et `/signup`.
-### Connéxion (`/`)
+### Connexion (`/`)
 Les comptes sont idéntifiés par `nom.prénom` comme sur l'intranet actuel de TSE.  
 
 Pour cette démontration, les mots de passes sont entièrement ignorés.
