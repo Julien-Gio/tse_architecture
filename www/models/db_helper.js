@@ -41,7 +41,7 @@ const does_user_exist_by_id = async (user_id) => {
 const does_promo_exist = async (promo_name) => {
     let out = true;
     try {
-        let res = await db_con.query("SELECT * FROM Promos WHERE name = '" + promo_name + "';");
+        let res = await db_con.query("SELECT * FROM Promos WHERE promo_name = '" + promo_name + "';");
         if (res.length == 0) {
             out = false;
         } else {
@@ -60,7 +60,7 @@ const get_promo_id_by_name = async (promo_name) => {
     let out = -1;
 
     try {
-        let res = await db_con.query("SELECT id_promo FROM Promos WHERE name = '" + promo_name + "';");
+        let res = await db_con.query("SELECT id_promo FROM Promos WHERE promo_name = '" + promo_name + "';");
         if (res.length == 0) {
             out = -1;
         } else {

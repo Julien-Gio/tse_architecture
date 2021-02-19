@@ -16,9 +16,9 @@ create_user = async (firstname, lastname, _password, account_type, promo) => {
         out = "Incomplete data";
     } else if (account_type != "student" && account_type != "admin") {
         out = "Account type data invalid (value passed: '" + account_type + "')";
-    } else if (await db_helper.does_promo_exist(promo) == false) {
+    } /*else if (await db_helper.does_promo_exist(promo) == false) {
         out = "Promo data invalid (value passed: '" + promo + "')";
-    }
+    }*/
     // (2)
     if (out == "valid" && await db_helper.does_user_exist_by_names(firstname, lastname)) {
         out = "User " + firstname + " " + lastname + " already exists";
@@ -28,7 +28,7 @@ create_user = async (firstname, lastname, _password, account_type, promo) => {
     // Create the account
     if (out == "valid") {
         try {
-            let promo_id = await db_helper.get_promo_id_by_name(promo);
+            let promo_id = parseInt(promo);
             await db_con.query("INSERT INTO Users (lastname, firstname, role, id_promo) VALUES " +
                                "('" + lastname + "', '" + firstname + "', '" + account_type + "', " + promo_id + ");");
         } catch (err) {

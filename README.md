@@ -33,8 +33,8 @@ Tables (*PK* : Primary Key, *FK* : Foreign Key, *U* : Unique) :
 # Fonctionnalités
 
 ## Landing
-N'etant pas encore connécté, seul deux pages sont accésibles : `/login` et `/signup`.
-### Connéxion (`/login`)
+N'etant pas encore connécté, seul deux pages sont accésibles : `/` et `/signup`.
+### Connéxion (`/`)
 Les comptes sont idéntifiés par `nom.prénom` comme sur l'intranet actuel de TSE.  
 
 Pour cette démontration, les mots de passes sont entièrement ignorés.
