@@ -8,7 +8,7 @@ La platforme est accessible pour des comptes de type étudtants ou administrateu
 
 # Choix Technologiques
 ## Serveur et client
-Ayant déjà une expérience construction de site en PHP, j'ai décidé de construire mon site avec **Node.js** et le framework **ElectionJS** pour être familier avec un plus grand panel de technologies.
+Ayant déjà une expérience construction de site en PHP, j'ai décidé de construire mon site avec **Node.js** et le framework **Express.js** pour être familier avec un plus grand panel de technologies.
 
 Pour facilité et accélérer le développement front (qui n'est pas la focalité du projet), je me suis aidé de **Bootstrap 4**.
 
